@@ -1,0 +1,1949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#0B3D91" />
+<title>Studi-Phy — Physics Made Clear, One Concept at a Time</title>
+<meta name="description" content="Studi-Phy is an online physics learning site with clear explanations, formulas, diagrams, and practice problems for senior high school students." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+
+<!-- MathJax (progressive enhancement — site still works offline) -->
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+  svg: { fontCache: 'global' },
+  options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+<style>
+/* ============================================================
+   Studi-Phy — single-file stylesheet
+   ============================================================ */
+:root{
+  --blue-900:#0B3D91; --blue-700:#15489E; --blue-600:#1E6FD9; --blue-500:#2E86F0;
+  --tint:#E8F1FC; --tint-2:#F5F9FF; --white:#FFFFFF;
+  --ink:#1A1A1A; --ink-soft:#46536B; --line:#CFE0F5;
+  --ok:#1B7F5A; --ok-bg:#E6F5EF; --bad:#B42318; --bad-bg:#FDECEA;
+  --radius:14px; --radius-sm:10px;
+  --shadow:0 2px 10px rgba(11,61,145,.08);
+  --shadow-lg:0 10px 28px rgba(11,61,145,.13);
+  --wrap:1120px; --header-h:74px;
+  --font-head:"Poppins", ui-sans-serif, system-ui, "Segoe UI", Arial, sans-serif;
+  --font-body:"Inter", ui-sans-serif, system-ui, "Segoe UI", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--header-h) + 16px);-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--font-body);font-size:1rem;line-height:1.68;color:var(--ink);background:var(--white)}
+img,svg{max-width:100%} img{height:auto}
+[hidden]{display:none !important}
+h1,h2,h3,h4{font-family:var(--font-head);line-height:1.22;color:var(--blue-900);margin:0 0 .5em;letter-spacing:-.01em}
+h1{font-size:clamp(1.9rem,4.4vw,3rem)}
+h2{font-size:clamp(1.45rem,2.8vw,2.05rem)}
+h3{font-size:1.14rem} h4{font-size:1rem}
+p{margin:0 0 1em}
+a{color:var(--blue-600);text-decoration-thickness:1.5px;text-underline-offset:3px}
+a:hover{color:var(--blue-900)}
+ul,ol{margin:0 0 1em;padding-left:1.25em}
+li{margin-bottom:.35em}
+strong{color:var(--blue-900)}
+:focus-visible{outline:3px solid var(--blue-500);outline-offset:2px;border-radius:4px}
+.wrap{width:min(100% - 2.5rem, var(--wrap));margin-inline:auto}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.skip-link{position:fixed;top:.5rem;left:.5rem;z-index:200;background:var(--blue-900);color:#fff;padding:.6rem 1rem;border-radius:8px;transform:translateY(-200%);transition:transform .2s;text-decoration:none;font-weight:600}
+.skip-link:focus{transform:translateY(0);color:#fff}
+
+/* ---------- Header ---------- */
+.site-header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.header-inner{position:relative;display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:var(--header-h)}
+.brand{display:flex;align-items:center;gap:.65rem;text-decoration:none;color:var(--blue-900)}
+.brand-mark{display:grid;place-items:center;width:40px;height:40px;flex:none;border-radius:12px;background:linear-gradient(140deg,var(--blue-600),var(--blue-900));color:#fff}
+.brand-text{display:flex;flex-direction:column;font-family:var(--font-head);font-weight:700;font-size:1.18rem;line-height:1.05}
+.brand-accent{color:var(--blue-600)}
+.brand-text small{font-family:var(--font-body);font-weight:500;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-top:3px}
+.primary-nav ul{display:flex;flex-wrap:wrap;gap:.15rem;list-style:none;margin:0;padding:0}
+.primary-nav a{display:block;padding:.5rem .62rem;border-radius:9px;color:var(--ink-soft);text-decoration:none;font-weight:500;font-size:.9rem;transition:background .18s,color .18s}
+.primary-nav a:hover{background:var(--tint);color:var(--blue-900)}
+.primary-nav a[aria-current="page"]{background:var(--blue-900);color:#fff}
+.nav-toggle{display:none;align-items:center;justify-content:center;width:44px;height:44px;padding:0;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--blue-900);cursor:pointer}
+.nav-toggle-bars{display:grid;gap:4px;width:20px}
+.nav-toggle-bars span{display:block;height:2px;background:currentColor;border-radius:2px;transition:.2s}
+
+/* ---------- Buttons ---------- */
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.3rem;border-radius:999px;font-family:var(--font-head);font-weight:600;font-size:.95rem;text-decoration:none;border:2px solid transparent;cursor:pointer;transition:transform .16s,box-shadow .16s,background .16s,border-color .16s}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:var(--blue-900);color:#fff;box-shadow:var(--shadow)}
+.btn-primary:hover{background:var(--blue-700);color:#fff;box-shadow:var(--shadow-lg)}
+.btn-ghost{background:#fff;color:var(--blue-900);border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--blue-600);color:var(--blue-900)}
+.btn-row{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.4rem}
+
+/* ---------- Layout ---------- */
+.section{padding:clamp(2.4rem,5vw,4rem) 0}
+.section-tint{background:var(--tint-2);border-block:1px solid var(--line)}
+.section-head{max-width:64ch;margin-bottom:1.8rem}
+.section-head p{color:var(--ink-soft);margin-bottom:0}
+.grid{display:grid;gap:1.1rem}
+.grid-2{grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+.grid-3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:1.35rem 1.4rem;box-shadow:var(--shadow)}
+.card h3{margin-bottom:.4rem}
+.card p:last-child{margin-bottom:0}
+.card-link{display:block;text-decoration:none;color:inherit;transition:transform .18s,box-shadow .18s,border-color .18s}
+.card-link:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--blue-600);color:inherit}
+.card-link .more{display:inline-block;margin-top:.6rem;font-weight:600;color:var(--blue-600);font-size:.9rem}
+
+/* ---------- Hero / page head ---------- */
+.hero{position:relative;overflow:hidden;background:linear-gradient(165deg,var(--tint-2) 0%,var(--tint) 55%,#DCEAFB 100%);border-bottom:1px solid var(--line);padding:clamp(2.8rem,6.5vw,5rem) 0}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(1.6rem,4vw,3rem);align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:.5rem;background:#fff;border:1px solid var(--line);color:var(--blue-900);font-size:.76rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;padding:.4rem .85rem;border-radius:999px;margin-bottom:1rem}
+.slogan{font-family:var(--font-head);font-weight:700;color:var(--blue-600);font-size:clamp(1.02rem,2vw,1.28rem);margin:0 0 .9rem}
+.hero p.lead{font-size:1.05rem;color:var(--ink-soft);max-width:52ch}
+.hero-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:1.6rem;box-shadow:var(--shadow-lg)}
+.hero-eq{font-family:var(--font-head);font-size:1.5rem;color:var(--blue-900);margin:0 0 .3rem;display:flex;align-items:center;gap:.32em;flex-wrap:wrap}
+.hero-note{color:var(--ink-soft);font-size:.92rem;margin:0 0 1rem}
+.hero-list{list-style:none;padding:1rem 0 0;margin:0;display:grid;gap:.55rem;border-top:1px dashed var(--line)}
+.hero-list li{display:flex;gap:.6rem;align-items:center;font-size:.92rem;color:var(--ink-soft);margin:0}
+.hero-list li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--blue-600);flex:none}
+.page-head{background:linear-gradient(160deg,var(--tint-2),var(--tint));border-bottom:1px solid var(--line);padding:clamp(2.2rem,5vw,3.6rem) 0}
+.page-head h1{margin-bottom:.45rem}
+.page-head p{max-width:66ch;color:var(--ink-soft);margin:0}
+.breadcrumb{font-size:.84rem;color:var(--ink-soft);margin-bottom:.7rem}
+.breadcrumb a{color:var(--ink-soft)}
+
+/* ---------- Tags & chips ---------- */
+.tag{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--blue-700);background:var(--tint);padding:.28rem .62rem;border-radius:999px;margin-bottom:.7rem}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.4rem}
+.chip{display:inline-flex;align-items:center;gap:.4rem;padding:.45rem .95rem;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--ink-soft);font:inherit;font-size:.87rem;font-weight:500;cursor:pointer;text-decoration:none;transition:background .18s,color .18s,border-color .18s}
+.chip:hover{border-color:var(--blue-600);color:var(--blue-900)}
+.chip[aria-pressed="true"]{background:var(--blue-900);border-color:var(--blue-900);color:#fff}
+
+/* ---------- Formulas ---------- */
+.formula-card{background:var(--tint-2);border:1px solid var(--line);border-left:4px solid var(--blue-600);border-radius:var(--radius-sm);padding:.9rem 1rem}
+.formula-card h4{margin:0 0 .35rem;font-size:.78rem;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);font-family:var(--font-body);font-weight:600}
+.formula{font-family:var(--font-head);font-weight:600;font-size:1.14rem;color:var(--blue-900);display:flex;align-items:center;gap:.34em;flex-wrap:wrap;line-height:1.55;margin:0}
+.formula .op{color:var(--ink-soft);font-weight:400}
+.formula sub,.formula sup{font-size:.66em}
+.formula-note{font-size:.86rem;color:var(--ink-soft);margin:.4rem 0 0}
+.formula-vars{font-size:.82rem;color:var(--ink-soft);margin:.35rem 0 0}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.15;margin:0 .1em}
+.frac>span{display:block;padding:0 .3em}
+.frac .num{border-bottom:1.6px solid currentColor}
+.formula-item h3{font-size:1.02rem;margin-bottom:.55rem}
+.search-field{position:relative;margin-bottom:1rem;max-width:520px}
+.search-field input{width:100%;padding:.85rem 1rem .85rem 2.8rem;border:1px solid var(--line);border-radius:var(--radius-sm);font:inherit;background:#fff;color:var(--ink)}
+.search-field input:focus{border-color:var(--blue-600);outline:none;box-shadow:0 0 0 4px rgba(30,111,217,.15)}
+.search-field svg{position:absolute;left:.95rem;top:50%;transform:translateY(-50%);color:var(--ink-soft)}
+.empty-state{color:var(--ink-soft);font-style:italic;padding:1.2rem 0}
+
+/* ---------- Diagrams ---------- */
+.diagram{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:1rem;margin:1.3rem 0}
+.diagram svg{display:block;width:100%;height:auto}
+.diagram figcaption{font-size:.83rem;color:var(--ink-soft);margin-top:.6rem;text-align:center}
+
+/* ---------- Callouts ---------- */
+.callout{border-left:4px solid var(--blue-600);background:var(--tint-2);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:1rem 1.15rem;margin:1.3rem 0}
+.callout p:last-child{margin-bottom:0}
+.callout-title{display:block;font-family:var(--font-head);font-weight:600;color:var(--blue-900);margin-bottom:.3rem}
+.callout.warn{border-color:#D97706;background:#FFF8EB}
+
+/* ---------- Accordion ---------- */
+.acc{border:1px solid var(--line);border-radius:var(--radius-sm);overflow:hidden;background:#fff;margin-bottom:.8rem}
+.acc-btn{width:100%;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem 1.1rem;background:#fff;border:0;font:inherit;font-family:var(--font-head);font-weight:600;color:var(--blue-900);text-align:left;cursor:pointer;transition:background .18s}
+.acc-btn:hover{background:var(--tint-2)}
+.acc-icon{flex:none;width:24px;height:24px;border-radius:50%;background:var(--tint);color:var(--blue-900);display:grid;place-items:center;font-size:1.05rem;line-height:1;transition:transform .22s,background .18s}
+.acc-btn[aria-expanded="true"] .acc-icon{transform:rotate(45deg);background:var(--blue-900);color:#fff}
+.acc-panel{padding:0 1.1rem 1.1rem;border-top:1px solid var(--line);font-size:.95rem}
+.acc-panel>*:first-child{margin-top:.9rem}
+.acc-panel>*:last-child{margin-bottom:0}
+
+/* ---------- Steps ---------- */
+.steps{counter-reset:s;list-style:none;padding:0;margin:0}
+.steps li{counter-increment:s;position:relative;padding-left:2.5rem;margin-bottom:.9rem}
+.steps li::before{content:counter(s);position:absolute;left:0;top:.05rem;width:1.75rem;height:1.75rem;border-radius:50%;background:var(--blue-900);color:#fff;display:grid;place-items:center;font-size:.8rem;font-weight:700;font-family:var(--font-head)}
+.steps li:last-child{margin-bottom:0}
+
+/* ---------- Tables ---------- */
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius-sm);margin-bottom:1.2rem}
+table{width:100%;border-collapse:collapse;font-size:.93rem}
+th,td{padding:.7rem .9rem;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--tint);color:var(--blue-900);font-family:var(--font-head);font-size:.8rem;text-transform:uppercase;letter-spacing:.05em}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:var(--tint-2)}
+
+/* ---------- Quiz ---------- */
+.quiz-q{border:1px solid var(--line);border-radius:var(--radius-sm);padding:1.1rem;background:#fff;margin:0 0 1rem}
+.quiz-q legend{font-family:var(--font-head);font-weight:600;color:var(--blue-900);padding:0 .3rem}
+.quiz-opt{display:flex;gap:.65rem;align-items:flex-start;padding:.5rem .6rem;border-radius:8px;cursor:pointer;border:1px solid transparent}
+.quiz-opt:hover{background:var(--tint-2)}
+.quiz-opt input{margin-top:.35rem;accent-color:var(--blue-600)}
+.quiz-fb{display:none;margin:.75rem 0 0;font-size:.92rem;font-weight:600;padding:.6rem .8rem;border-radius:8px}
+.quiz-fb.show{display:block}
+.quiz-fb.ok{color:var(--ok);background:var(--ok-bg)}
+.quiz-fb.bad{color:var(--bad);background:var(--bad-bg)}
+
+/* ---------- LaTeX lab ---------- */
+.latex-lab{background:var(--tint-2);border:1px dashed var(--blue-600);border-radius:var(--radius);padding:1.25rem}
+.latex-lab label{display:block;font-weight:600;color:var(--blue-900);margin-bottom:.45rem;font-size:.92rem}
+.latex-lab textarea{width:100%;min-height:74px;font-family:var(--font-mono);font-size:.9rem;padding:.7rem;border:1px solid var(--line);border-radius:8px;resize:vertical;color:var(--ink)}
+.latex-out{margin-top:.9rem;padding:1rem;background:#fff;border:1px solid var(--line);border-radius:8px;min-height:60px;overflow-x:auto}
+.latex-hint{font-size:.82rem;color:var(--ink-soft);margin:.6rem 0 0}
+.tex-samples{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.6rem}
+.tex-samples button{font:inherit;font-size:.78rem;font-family:var(--font-mono);padding:.3rem .6rem;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--blue-700);cursor:pointer}
+.tex-samples button:hover{border-color:var(--blue-600);background:var(--tint)}
+
+/* ---------- Topics ---------- */
+.topic + .topic{margin-top:2rem}
+.topic h2{margin-bottom:.5rem}
+.topic h3{margin-top:1.6rem}
+
+/* ---------- Team ---------- */
+.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:1.1rem}
+.member{display:flex;flex-direction:column;align-items:center;text-align:center;padding:1.7rem 1.3rem}
+.avatar{position:relative;width:104px;height:104px;border-radius:50%;background:linear-gradient(140deg,var(--blue-600),var(--blue-900));display:grid;place-items:center;margin-bottom:1rem;flex:none;box-shadow:0 6px 18px rgba(11,61,145,.2);overflow:hidden}
+.avatar::before{content:attr(data-initials);font-family:var(--font-head);font-weight:700;font-size:2rem;color:#fff;letter-spacing:.02em}
+.avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:50%}
+.member h3{font-size:1.06rem;margin:0 0 .4rem;line-height:1.3}
+.member-role{display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--blue-700);background:var(--tint);padding:.28rem .68rem;border-radius:999px;margin-bottom:.75rem}
+.member-note{font-size:.89rem;color:var(--ink-soft);margin:0;line-height:1.6}
+.member.is-lead{border-color:#E8C87A;background:linear-gradient(180deg,#FFFDF6,#fff)}
+.member.is-lead .avatar{box-shadow:0 0 0 3px #fff,0 0 0 6px #E8C87A,0 6px 18px rgba(11,61,145,.2)}
+.member.is-lead .member-role{background:#FFF4DC;color:#8A5A00}
+
+/* ---------- Footer ---------- */
+.site-footer{background:var(--blue-900);color:#CFE0F5;padding:2.6rem 0 1.4rem;margin-top:3rem}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1.15fr;gap:2rem}
+.site-footer h3{color:#fff;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.8rem}
+.footer-brand{font-family:var(--font-head);font-weight:700;font-size:1.4rem;color:#fff;margin:0 0 .25rem}
+.footer-brand span{color:#7FB2F5}
+.footer-tag{color:#A9C6EC;margin:0;font-size:.92rem}
+.site-footer ul{list-style:none;padding:0;margin:0}
+.site-footer li{margin-bottom:.35rem}
+.site-footer a{color:#CFE0F5;text-decoration:none}
+.site-footer a:hover{color:#fff;text-decoration:underline}
+.site-footer p{font-size:.9rem;margin:0 0 .35rem}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.16);margin-top:2rem;padding-top:1rem}
+.footer-bottom p{font-size:.82rem;color:#A9C6EC;margin:0}
+
+/* ---------- Back to top ---------- */
+.to-top{position:fixed;right:1.1rem;bottom:1.1rem;z-index:90;width:46px;height:46px;border-radius:50%;border:0;background:var(--blue-900);color:#fff;font-size:1.1rem;cursor:pointer;box-shadow:var(--shadow-lg);opacity:0;pointer-events:none;transform:translateY(10px);transition:opacity .22s,transform .22s}
+.to-top.show{opacity:1;pointer-events:auto;transform:none}
+
+/* ---------- Reveal ---------- */
+html.js .reveal{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s ease}
+html.js .reveal.is-visible{opacity:1;transform:none}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1000px){
+  .primary-nav a{padding:.5rem .5rem;font-size:.86rem}
+}
+@media (max-width:900px){
+  .nav-toggle{display:inline-flex}
+  .primary-nav{position:absolute;left:0;right:0;top:100%;background:#fff;border-bottom:1px solid var(--line);box-shadow:var(--shadow-lg);padding:.6rem 1rem 1rem;display:none}
+  .primary-nav.is-open{display:block}
+  .primary-nav ul{flex-direction:column;gap:.1rem}
+  .primary-nav a{padding:.75rem .8rem;font-size:.93rem}
+  .nav-toggle[aria-expanded="true"] .nav-toggle-bars span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+  .nav-toggle[aria-expanded="true"] .nav-toggle-bars span:nth-child(2){opacity:0}
+  .nav-toggle[aria-expanded="true"] .nav-toggle-bars span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+}
+@media (max-width:820px){
+  .hero-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .footer-grid > div:first-child{grid-column:1 / -1}
+}
+@media (max-width:560px){
+  .footer-grid{grid-template-columns:1fr}
+  .brand-text small{display:none}
+  .btn{width:100%;justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  html.js .reveal{opacity:1;transform:none;transition:none}
+  *{animation-duration:.001ms !important;transition-duration:.001ms !important}
+}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#mainContent">Skip to content</a>
+
+<!-- ==================== HEADER ==================== -->
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="#/home" aria-label="Studi-Phy home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6">
+          <circle cx="12" cy="12" r="2.1" fill="currentColor" stroke="none"/>
+          <ellipse cx="12" cy="12" rx="10" ry="4.2"/>
+          <ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(60 12 12)"/>
+          <ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(120 12 12)"/>
+        </svg>
+      </span>
+      <span class="brand-text">
+        <span class="brand-name">Studi<span class="brand-accent">-Phy</span></span>
+        <small>Physics Made Clear</small>
+      </span>
+    </a>
+
+    <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="primaryNav">
+      <span class="nav-toggle-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+      <span class="sr-only">Toggle navigation menu</span>
+    </button>
+
+    <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+      <ul>
+        <li><a href="#/home" data-nav="home">Home</a></li>
+        <li><a href="#/about" data-nav="about">About</a></li>
+        <li><a href="#/team" data-nav="team">Team</a></li>
+        <li><a href="#/topics" data-nav="topics">Topics</a></li>
+        <li><a href="#/formulas" data-nav="formulas">Formulas</a></li>
+        <li><a href="#/practice" data-nav="practice">Practice</a></li>
+        <li><a href="#/resources" data-nav="resources">Resources</a></li>
+        <li><a href="#/tips" data-nav="tips">Study Tips</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="mainContent">
+
+<!-- ============================================================
+     PAGE: HOME
+     ============================================================ -->
+<div class="page" id="page-home">
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">Senior High School · STEM</span>
+        <h1>Physics, explained step by step.</h1>
+        <p class="slogan">&ldquo;Physics Made Clear, One Concept at a Time.&rdquo;</p>
+        <p class="lead">
+          Welcome to Studi-Phy &mdash; a free, student-friendly space where physics ideas are broken
+          down into plain language, simple diagrams, and worked examples. Whether you are reviewing
+          for an exam or meeting a topic for the first time, you can move at your own pace.
+        </p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="#/topics">Start with the topics</a>
+          <a class="btn btn-ghost" href="#/formulas">Browse the formulas</a>
+        </div>
+      </div>
+
+      <aside class="hero-card">
+        <span class="tag">Today&rsquo;s idea</span>
+        <p class="hero-eq">v <span class="op">=</span> v<sub>0</sub> <span class="op">+</span> at</p>
+        <p class="hero-note">
+          Final velocity equals starting velocity plus acceleration multiplied by time &mdash;
+          the first equation most students learn in kinematics.
+        </p>
+        <ul class="hero-list">
+          <li>5 core topics, explained from scratch</li>
+          <li>Every formula paired with &ldquo;when to use it&rdquo;</li>
+          <li>Worked solutions you can reveal one step at a time</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>What you&rsquo;ll find on Studi-Phy</h2>
+        <p>Eight sections, each built around one question a student actually asks.</p>
+      </div>
+
+      <div class="grid grid-3">
+        <a class="card card-link reveal" href="#/topics">
+          <span class="tag">Learn</span>
+          <h3>Physics Topics</h3>
+          <p>Mechanics, forces, energy, electricity, and waves &mdash; each with key ideas, diagrams, and a worked example.</p>
+          <span class="more">Open topics &rarr;</span>
+        </a>
+        <a class="card card-link reveal" href="#/formulas">
+          <span class="tag">Reference</span>
+          <h3>Formulas &amp; Quick Reference</h3>
+          <p>A clean, searchable list of equations with a short note on when each one applies.</p>
+          <span class="more">Open formulas &rarr;</span>
+        </a>
+        <a class="card card-link reveal" href="#/practice">
+          <span class="tag">Apply</span>
+          <h3>Practice &amp; Examples</h3>
+          <p>Sample problems with hidden step-by-step solutions and a five-question self-check.</p>
+          <span class="more">Start practising &rarr;</span>
+        </a>
+        <a class="card card-link reveal" href="#/resources">
+          <span class="tag">Explore</span>
+          <h3>Learning Resources</h3>
+          <p>Trusted sites, simulations, and video channels for going deeper &mdash; plus our credits.</p>
+          <span class="more">See resources &rarr;</span>
+        </a>
+        <a class="card card-link reveal" href="#/tips">
+          <span class="tag">Study</span>
+          <h3>Study Tips</h3>
+          <p>Practical habits for learning physics: how to read a problem, draw a diagram, and check an answer.</p>
+          <span class="more">Read the tips &rarr;</span>
+        </a>
+        <a class="card card-link reveal" href="#/team">
+          <span class="tag">People</span>
+          <h3>The Team</h3>
+          <p>Meet Group 9 &mdash; the students who wrote, designed, and coded Studi-Phy.</p>
+          <span class="more">Meet the team &rarr;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>How Studi-Phy is meant to be used</h2>
+        <p>Understanding physics is a loop, not a straight line.</p>
+      </div>
+
+      <div class="grid grid-2">
+        <div class="card reveal">
+          <h3>Three steps, repeated</h3>
+          <ol class="steps">
+            <li><strong>Understand the idea.</strong> Read the plain-language explanation and the key terms.</li>
+            <li><strong>See it.</strong> Look at the diagram and connect the labels to the words.</li>
+            <li><strong>Try it.</strong> Attempt the worked example yourself before revealing the solution.</li>
+          </ol>
+        </div>
+        <div class="card reveal">
+          <h3>Why it works</h3>
+          <p>
+            Physics is not a list of formulas to memorise. Each equation is a sentence about how
+            the world behaves &mdash; and it only becomes meaningful once you can picture the
+            situation it describes.
+          </p>
+          <p>
+            Every page here follows the same order: <strong>concept &rarr; picture &rarr; equation
+            &rarr; example</strong>. Skip a step and the formula feels arbitrary; follow the order
+            and it starts to feel obvious.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="card reveal" style="text-align:center;">
+        <h2>Ready to begin?</h2>
+        <p style="max-width:56ch;margin-inline:auto;color:var(--ink-soft);">
+          Pick a topic, or start with the formulas if you already know what you are looking for.
+          Nothing here is locked behind an account.
+        </p>
+        <div class="btn-row" style="justify-content:center;">
+          <a class="btn btn-primary" href="#/topics">Browse topics</a>
+          <a class="btn btn-ghost" href="#/practice">Try a practice problem</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============================================================
+     PAGE: ABOUT
+     ============================================================ -->
+<div class="page" id="page-about" hidden>
+
+  <section class="page-head">
+    <div class="wrap">
+      <p class="breadcrumb"><a href="#/home">Home</a> / About the Project</p>
+      <h1>About Studi-Phy</h1>
+      <p>An online physics learning website built to make physics concepts clear, accessible, and engaging for students and independent learners.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap grid grid-2">
+      <div class="card reveal">
+        <span class="tag">Purpose</span>
+        <h2>Why this site exists</h2>
+        <p>
+          Studi-Phy explains key physics topics using simple language, visual aids, formulas,
+          real-life examples, and practice materials. The goal is not to replace a textbook or a
+          teacher, but to give learners a second explanation &mdash; one they can read slowly,
+          re-read, and test themselves against without anyone watching.
+        </p>
+        <p>
+          Many students can follow a physics lesson in class and still feel lost when they open
+          their notes at home. Studi-Phy is written for exactly that moment.
+        </p>
+      </div>
+
+      <div class="card reveal">
+        <span class="tag">Message</span>
+        <h2>What it is trying to say</h2>
+        <p class="slogan" style="font-size:1.15rem;">&ldquo;Physics Made Clear, One Concept at a Time.&rdquo;</p>
+        <p>
+          Physics is understandable and relevant when it is explained step by step. With the right
+          explanations, visuals, and practice, anyone can grasp important ideas and apply them in
+          school and in everyday life.
+        </p>
+        <p>
+          The site deliberately moves slowly. One concept is introduced, pictured, written as an
+          equation, and then practised &mdash; before the next one begins.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Who Studi-Phy is for</h2>
+        <p>The site is written for the people most likely to need a second explanation.</p>
+      </div>
+      <div class="grid grid-3">
+        <div class="card reveal">
+          <h3>Senior High School students</h3>
+          <p>Especially students in the STEM strand who are meeting mechanics, electricity, and waves for the first time.</p>
+        </div>
+        <div class="card reveal">
+          <h3>Teachers</h3>
+          <p>As a source of short, plain-language explanations, diagrams, and ready-made practice items.</p>
+        </div>
+        <div class="card reveal">
+          <h3>Independent learners</h3>
+          <p>Anyone in the school community &mdash; or outside it &mdash; who wants to learn or review physics at their own pace.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>What is inside the site</h2>
+        <p>Eight sections, each with a single clear job.</p>
+      </div>
+      <div class="table-wrap reveal">
+        <table>
+          <thead><tr><th scope="col">Section</th><th scope="col">What it does</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Home</strong></td><td>Introduces Studi-Phy through its title, slogan, and a short welcoming message.</td></tr>
+            <tr><td><strong>About the Project</strong></td><td>Explains the purpose of the website and why clear physics resources matter.</td></tr>
+            <tr><td><strong>The Team</strong></td><td>Credits the members of Group 9 and the part each one played in building the site.</td></tr>
+            <tr><td><strong>Physics Topics</strong></td><td>Mechanics, forces, energy, electricity, and waves &mdash; with key concepts, formulas, diagrams, and examples.</td></tr>
+            <tr><td><strong>Formulas &amp; Quick Reference</strong></td><td>A searchable collection of important equations with notes on when to use them.</td></tr>
+            <tr><td><strong>Practice &amp; Examples</strong></td><td>Sample problems with step-by-step solutions and a self-check quiz.</td></tr>
+            <tr><td><strong>Learning Resources</strong></td><td>Links to credible educational sites, videos, and simulations &mdash; plus credits.</td></tr>
+            <tr><td><strong>Study Tips</strong></td><td>Short, practical advice on how to study physics effectively.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>How the site was built</h2>
+        <p>The planned build uses free, accessible tools; this coded version follows the same structure.</p>
+      </div>
+      <div class="table-wrap reveal">
+        <table>
+          <thead><tr><th scope="col">Tool</th><th scope="col">Role in the project</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Google Sites</strong></td><td>Primary platform &mdash; free multi-page website with no advanced coding required.</td></tr>
+            <tr><td><strong>HTML, CSS, JavaScript</strong></td><td>This coded prototype of the same design, built and edited in Visual Studio Code.</td></tr>
+            <tr><td><strong>Claude AI</strong></td><td>Drafting clear physics explanations, sample problems, and website copy.</td></tr>
+            <tr><td><strong>Canva</strong></td><td>Banners, topic icons, and visual diagrams.</td></tr>
+            <tr><td><strong>Photopea</strong></td><td>Cropping, resizing, and enhancing images.</td></tr>
+            <tr><td><strong>Google Docs</strong></td><td>Organising and refining content before publishing.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout reveal">
+        <span class="callout-title">Content and credit policy</span>
+        <p>
+          All explanatory text on this site is original. Images and diagrams are either created for
+          the project or credited to their source on the <a href="#/resources">Resources</a> page.
+          Before publication, the site is reviewed for accuracy, readability, visual consistency,
+          navigation, accessibility, and responsible use of digital content.
+        </p>
+      </div>
+
+      <div class="callout warn reveal">
+        <span class="callout-title">A note on accuracy</span>
+        <p>
+          Physics content here is written to be student-friendly, not exhaustive. Always check
+          worked solutions against your own textbook or your teacher&rsquo;s method &mdash;
+          especially for sign conventions and significant figures.
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============================================================
+     PAGE: TEAM
+     ============================================================ -->
+<div class="page" id="page-team" hidden>
+
+  <section class="page-head">
+    <div class="wrap">
+      <p class="breadcrumb"><a href="#/home">Home</a> / The Team</p>
+      <h1>The Team Behind Studi-Phy</h1>
+      <p>
+        Studi-Phy was researched, written, designed, and coded by <strong>Group 9 of Grade 12 STEM
+        &ndash; Avery</strong> as a culminating project in Empowerment Technologies.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Who made what</h2>
+        <p>Every member carried a different part of the build &mdash; content, design, code, and editing.</p>
+      </div>
+
+      <div class="team-grid">
+
+        <!-- ===== MEMBER 1 ===== -->
+        <article class="card member reveal">
+          <div class="avatar" data-initials="SC">
+            <img src="images/SC.jfif" alt="Photo of Sean Castro" loading="lazy" onerror="this.style.display='none'">
+          </div>
+          <h3>Sean Castro</h3>
+          <span class="member-role">Web Developer</span>
+          <p class="member-note">Built the site&rsquo;s HTML, CSS, and JavaScript &mdash; page structure, styling, search, quiz, and the final assembly of all pages.</p>
+        </article>
+
+        <!-- ===== MEMBER 2 (leader) ===== -->
+        <article class="card member is-lead reveal">
+          <div class="avatar" data-initials="TS">
+            <img src="images/T-iii-G.png" alt="Photo of Teodoro III Saladaga" loading="lazy" onerror="this.style.display='none'">
+          </div>
+          <h3>Teodoro III Saladaga</h3>
+          <span class="member-role">Group Leader &amp; Editor</span>
+          <p class="member-note">Coordinated the group&rsquo;s timeline and tasks, and edited and proofread the final copy before publication.</p>
+        </article>
+
+        <!-- ===== MEMBER 3 ===== -->
+        <article class="card member reveal">
+          <div class="avatar" data-initials="RS">
+            <img src="images/RRS.jpg" alt="Photo of Rieko Rage Sierras" loading="lazy" onerror="this.style.display='none'">
+          </div>
+          <h3>Rieko Rage Sierras</h3>
+          <span class="member-role">Content &amp; Editor</span>
+          <p class="member-note">Wrote topic explanations and reviewed the formulas and worked solutions for clarity and accuracy.</p>
+        </article>
+
+        <!-- ===== MEMBER 4 ===== -->
+        <article class="card member reveal">
+          <div class="avatar" data-initials="RB">
+            <img src="images/RMB.jpg" alt="Photo of Rhea Mae Bacunador" loading="lazy" onerror="this.style.display='none'">
+          </div>
+          <h3>Rhea Mae Bacunador</h3>
+          <span class="member-role">Content &amp; Visual Design</span>
+          <p class="member-note">Contributed written content and designed banners, icons, and the visual layout of the site.</p>
+        </article>
+
+        <!-- ===== MEMBER 5 ===== -->
+        <article class="card member reveal">
+          <div class="avatar" data-initials="SK">
+            <img src="images/SNC.png" alt="Photo of Skyler Nethaniel Conje" loading="lazy" onerror="this.style.display='none'">
+          </div>
+          <h3>Skyler Nethaniel Conje</h3>
+          <span class="member-role">Content &amp; Visual Design</span>
+          <p class="member-note">Contributed written content and produced the diagrams and page visuals used throughout the site.</p>
+        </article>
+
+      </div>
+
+      <div class="callout reveal" style="margin-top:2rem;">
+        <span class="callout-title">About these roles</span>
+        <p>
+          Roles describe each member&rsquo;s <em>main</em> contribution &mdash; in practice everyone
+          helped with more than one part of the build. A full list of external sources, images, and
+          licences is on the <a href="#/resources">Resources</a> page.
+        </p>
+      </div>
+
+      <div class="btn-row">
+        <a class="btn btn-primary" href="#/resources">See resources &amp; credits</a>
+        <a class="btn btn-ghost" href="#/about">Read about the project</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============================================================
+     PAGE: TOPICS
+     ============================================================ -->
+<div class="page" id="page-topics" hidden>
+
+  <section class="page-head">
+    <div class="wrap">
+      <p class="breadcrumb"><a href="#/home">Home</a> / Physics Topics</p>
+      <h1>Physics Topics</h1>
+      <p>Five core areas, each explained in the same order: the idea, the picture, the equations, and a worked example.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+
+      <nav class="chips" aria-label="Jump to a topic">
+        <button class="chip" type="button" data-scroll="kinematics">Mechanics &amp; Kinematics</button>
+        <button class="chip" type="button" data-scroll="forces">Forces &amp; Motion</button>
+        <button class="chip" type="button" data-scroll="energy">Energy &amp; Work</button>
+        <button class="chip" type="button" data-scroll="electricity">Electricity &amp; Electrostatics</button>
+        <button class="chip" type="button" data-scroll="waves">Waves &amp; Sound</button>
+      </nav>
+
+      <!-- ---------- TOPIC 1 ---------- -->
+      <article class="card topic reveal" id="kinematics">
+        <span class="tag">Topic 1</span>
+        <h2>Mechanics &amp; Kinematics</h2>
+        <p>
+          Kinematics is the study of <em>how</em> things move, without asking what causes the
+          motion. It deals with position, displacement, speed, velocity, acceleration, and time.
+          Almost every other topic in physics builds on these ideas.
+        </p>
+
+        <h3>Key ideas</h3>
+        <ul>
+          <li><strong>Distance vs. displacement.</strong> Distance is how far you travelled; displacement is how far you ended up from the start, in a stated direction.</li>
+          <li><strong>Speed vs. velocity.</strong> Speed is a scalar (magnitude only); velocity is a vector (magnitude and direction).</li>
+          <li><strong>Acceleration</strong> is the rate at which velocity changes. Slowing down is still acceleration &mdash; just with the opposite sign.</li>
+          <li><strong>Free fall.</strong> Near Earth&rsquo;s surface, ignoring air resistance, every object accelerates downward at about <strong>g = 9.8 m/s&sup2;</strong>.</li>
+        </ul>
+
+        <figure class="diagram">
+          <svg viewBox="0 0 480 220" role="img" aria-labelledby="dgmKinTitle">
+            <title id="dgmKinTitle">A projectile following a curved path, with a constant horizontal velocity arrow and a downward acceleration arrow.</title>
+            <defs>
+              <marker id="arwA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 z" fill="#1E6FD9"/>
+              </marker>
+              <marker id="arwB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 z" fill="#0B3D91"/>
+              </marker>
+            </defs>
+            <line x1="30" y1="185" x2="455" y2="185" stroke="#CFE0F5" stroke-width="2"/>
+            <path d="M55 178 Q 240 18 425 178" fill="none" stroke="#1E6FD9" stroke-width="2.5" stroke-dasharray="8 6"/>
+            <circle cx="55" cy="178" r="7" fill="#0B3D91"/>
+            <circle cx="240" cy="76" r="7" fill="#1E6FD9"/>
+            <circle cx="425" cy="178" r="7" fill="#0B3D91"/>
+            <line x1="240" y1="76" x2="330" y2="76" stroke="#1E6FD9" stroke-width="2.5" marker-end="url(#arwA)"/>
+            <text x="336" y="81" font-family="Inter, sans-serif" font-size="13" fill="#1E6FD9">v horizontal constant</text>
+            <line x1="240" y1="76" x2="240" y2="140" stroke="#0B3D91" stroke-width="2.5" marker-end="url(#arwB)"/>
+            <text x="250" y="128" font-family="Inter, sans-serif" font-size="13" fill="#0B3D91">a = g</text>
+            <text x="35" y="205" font-family="Inter, sans-serif" font-size="12" fill="#46536B">launch</text>
+            <text x="215" y="205" font-family="Inter, sans-serif" font-size="12" fill="#46536B">peak</text>
+            <text x="400" y="205" font-family="Inter, sans-serif" font-size="12" fill="#46536B">landing</text>
+          </svg>
+          <figcaption>A projectile&rsquo;s horizontal velocity stays constant; only the vertical motion accelerates.</figcaption>
+        </figure>
+
+        <h3>Key formulas</h3>
+        <div class="grid grid-3">
+          <div class="formula-card">
+            <h4>Average velocity</h4>
+            <p class="formula">v&#772; <span class="op">=</span> <span class="frac"><span class="num">&Delta;d</span><span class="den">&Delta;t</span></span></p>
+            <p class="formula-note">Use for steady or average motion over a time interval.</p>
+          </div>
+          <div class="formula-card">
+            <h4>Acceleration</h4>
+            <p class="formula">a <span class="op">=</span> <span class="frac"><span class="num">&Delta;v</span><span class="den">&Delta;t</span></span></p>
+            <p class="formula-note">Use when velocity changes at a constant rate.</p>
+          </div>
+          <div class="formula-card">
+            <h4>Velocity with acceleration</h4>
+            <p class="formula">v <span class="op">=</span> v<sub>0</sub> <span class="op">+</span> at</p>
+            <p class="formula-note">Use when you know the starting velocity and the acceleration.</p>
+          </div>
+          <div class="formula-card">
+            <h4>Displacement</h4>
+            <p class="formula">d <span class="op">=</span> v<sub>0</sub>t <span class="op">+</span> &frac12;at&sup2;</p>
+            <p class="formula-note">Use when time is known but final velocity is not.</p>
+          </div>
+          <div class="formula-card">
+            <h4>Velocity&ndash;displacement</h4>
+            <p class="formula">v&sup2; <span class="op">=</span> v<sub>0</sub>&sup2; <span class="op">+</span> 2ad</p>
+            <p class="formula-note">Use when time is unknown.</p>
+          </div>
+          <div class="formula-card">
+            <h4>Free fall</h4>
+            <p class="formula">g <span class="op">&asymp;</span> 9.8 m/s&sup2;</p>
+            <p class="formula-note">Use for objects falling with only gravity acting on them.</p>
+          </div>
+        </div>
+
+        <h3>Worked example</h3>
+        <div class="acc">
+          <button class="acc-btn" type="button" aria-expanded="false" aria-controls="exKin">
+            A car accelerates uniformly from rest at 2.0 m/s&sup2; for 5.0 s. Find its final velocity and the distance covered.
+            <span class="acc-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="acc-panel" id="exKin" hidden>
+            <p><strong>Step 1 &mdash; List what is given.</strong> v<sub>0</sub> = 0 m/s, a = 2.0 m/s&sup2;, t = 5.0 s.</p>
+            <p><strong>Step 2 &mdash; Find the final velocity.</strong> v = v<sub>0</sub> + at = 0 + (2.0)(5.0) = <strong>10 m/s</strong>.</p>
+            <p><strong>Step 3 &mdash; Find the distance.</strong> d = v<sub>0</sub>t + &frac12;at&sup2; = 0 + &frac12;(2.0)(5.0)&sup2; = &frac12;(2.0)(25) = <strong>25 m</strong>.</p>
+            <p><strong>Check.</strong> Average velocity is (0 + 10)/2 = 5.0 m/s, and 5.0 m/s &times; 5.0 s = 25 m. It matches.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- ---------- TOPIC 2 ---------- -->
+      <article class="card topic reveal" id="forces">
+        <span class="tag">Topic 2</span>
+        <h2>Forces &amp; Motion</h2>
+        <p>
+          Dynamics asks the next question: <em>why</em> does motion change? The answer is always a
+          force &mdash; a push or a pull acting on an object. Newton&rsquo;s three laws describe how
+          forces and motion are connected.
+        </p>
+
+        <h3>Key ideas</h3>
+        <ul>
+          <li><strong>First law (inertia).</strong> An object keeps doing what it is doing unless a net external force acts on it.</li>
+          <li><strong>Second law.</strong> Net force equals mass times acceleration: <strong>F<sub>net</sub> = ma</strong>.</li>
+          <li><strong>Third law.</strong> Forces come in pairs: if A pushes B, B pushes A back with equal strength in the opposite direction.</li>
+          <li><strong>Weight is not mass.</strong> Mass is measured in kilograms; weight is a force, W = mg, measured in newtons.</li>
+        </ul>
+
+        <figure class="diagram">
+          <svg viewBox="0 0 460 260" role="img" aria-labelledby="dgmFbdTitle">
+            <title id="dgmFbdTitle">Free-body diagram of a block showing normal force upward, weight downward, applied force to the right, and friction to the left.</title>
+            <defs>
+              <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 z" fill="#0B3D91"/>
+              </marker>
+              <marker id="arwD" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 z" fill="#1E6FD9"/>
+              </marker>
+            </defs>
+            <line x1="30" y1="200" x2="430" y2="200" stroke="#0B3D91" stroke-width="2.5"/>
+            <rect x="170" y="140" width="120" height="60" rx="6" fill="#E8F1FC" stroke="#1E6FD9" stroke-width="2.5"/>
+            <text x="212" y="177" font-family="Inter, sans-serif" font-size="13" fill="#0B3D91">block</text>
+            <line x1="230" y1="140" x2="230" y2="72" stroke="#0B3D91" stroke-width="2.5" marker-end="url(#arwC)"/>
+            <text x="240" y="86" font-family="Inter, sans-serif" font-size="13" fill="#0B3D91">N</text>
+            <line x1="230" y1="200" x2="230" y2="248" stroke="#0B3D91" stroke-width="2.5" marker-end="url(#arwC)"/>
+            <text x="240" y="240" font-family="Inter, sans-serif" font-size="13" fill="#0B3D91">W = mg</text>
+            <line x1="290" y1="170" x2="390" y2="170" stroke="#1E6FD9" stroke-width="2.5" marker-end="url(#arwD)"/>
+            <text x="330" y="162" font-family="Inter, sans-serif" font-size="13" fill="#1E6FD9">F applied</text>
+            <line x1="170" y1="170" x2="80" y2="170" stroke="#1E6FD9" stroke-width="2.5" marker-end="url(#arwD)"/>
+            <text x="78" y="162" font-family="Inter, sans-serif" font-size="13" fill="#1E6FD9">f friction</text>
+          </svg>
+          <figcaption>A free-body diagram: every force drawn as an arrow starting on the object.</figcaption>
+        </figure>
+
+        <h3>Key formulas</h3>
+        <div class="grid grid-3">
+          <div class="formula-card">
+            <h4>Newton&rsquo;s second law</h4>
+            <p class="formula">F<sub>net</sub> <span class="op">=</span> ma</p>
+            <p class="formula-note">Use whenever a net force causes acceleration.</p>
+          </div>
+          <div class="formula-card">
+            <h4>Weight</h4>
+            <p class="formula">W <span class="op">=</span> mg</p>
+            <p class="formula-note">Use to convert mass (kg) into weight (N).</p>
+          </div>
+          <div class="formula-card">
+            <h4>Friction</h4>
+            <p class="formula">f <span class="op">=</span> &mu;N</p>
+            <p class="formula-note">Use for sliding contact; &mu; depends on the two surfaces.</p>
+          </div>
+          <div class="formula-card">
+            <h4>Momentum</h4>
+            <p class="formula">p <span class="op">=</span> mv</p>
+            <p class="formula-note">Use for collisions and explosions.</p>
+          </div>
+          <div class="formula-card">
+            <h4>Impulse</h4>
+            <p class="formula">F&Delta;t <span class="op">=</span> &Delta;p</p>
+            <p class="formula-note">Use when a force acts for a measured time.</p>
+          </div>
+        </div>
+
+        <h3>Worked example</h3>
+        <div class="acc">
+          <button class="acc-btn" type="button" aria-expanded="false" aria-controls="exFor">
+            A 4.0 kg box is pushed with 20 N across a floor where friction is 8.0 N. Find its acceleration.
+            <span class="acc-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="acc-panel" id="exFor" hidden>
+            <p><strong>Step 1 &mdash; Find the net force.</strong> The push and friction oppose each other: F<sub>net</sub> = 20 &minus; 8.0 = 12 N.</p>
+            <p><strong>Step 2 &mdash; Apply F = ma.</strong> 12 = (4.0)a, so a = 12 / 4.0 = <strong>3.0 m/s&sup2;</strong> in the direction of the push.</p>
+            <p><strong>Check.</strong> Weight is 4.0 &times; 9.8 = 39 N, far larger than the push, so the box stays on the floor. The answer is reasonable.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- ---------- TOPIC 3 ---------- -->
+      <article class="card topic reveal" id="energy">
+        <span class="tag">Topic 3</span>
+        <h2>Energy &amp; Work</h2>
+        <p>
+          Energy is the capacity to do work. It cannot be created or destroyed &mdash; only
+          transferred or transformed. That single sentence, the conservation of energy, is one of the
+          most powerful tools in physics.
+        </p>
+
+        <h3>Key ideas</h3>
+        <ul>
+          <li><strong>Work</strong> is done when a force moves an object along the direction of the force.</li>
+          <li><strong>Kinetic energy</strong> is the energy of motion; it depends on the <em>square</em> of the speed.</li>
+          <li><strong>Gravitational potential energy</strong> depends on height above a reference point.</li>
+          <li><strong>Power</strong> is the rate of doing work &mdash; energy per unit time, measured in watts.</li>
+        </ul>
+
+        <h3>Key formulas</h3>
+        <div class="grid grid-3">
+          <div class="formula-card">
+            <h4>Work</h4>
+            <p class="formula">W <span class="op">=</span> Fd cos&theta;</p>
+            <p class="formula-note">Use when the force is at an angle to the motion.</p>
+          </div>
+          <div class="formula-card">
+            <h4>Kinetic energy</h4>
+            <p class="formula">KE <span class="op">=</span> &frac12;mv&sup2;</p>
+            <p class="formula-note">Use for any moving object.</p>
+          </div>
+          <div class="formula-card">
+            <h4>Potential energy</h4>
+            <p class="formula">PE <span class="op">=</span> mgh</p>
+            <p class="formula-note">Use for objects raised above a reference level.</p>
+          </div>
+          <div class="formula-card">
+            <h4>Power</h4>
+            <p class="formula">P <span class="op">=</span> <span class="frac"><span class="num">W</span><span class="den">t</span></span></p>
+            <p class="formula-note">Use to compare how quickly work is done.</p>
+          </div>
+        </div>
+
+        <h3>Worked example</h3>
+        <div class="acc">
+          <button class="acc-btn" type="button" aria-expanded="false" aria-controls="exEne">
+            A 2.0 kg ball is dropped from 5.0 m. Ignoring air resistance, find its speed just before it lands.
+            <span class="acc-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="acc-panel" id="exEne" hidden>
+            <p><strong>Step 1 &mdash; Compare energies.</strong> All the potential energy becomes kinetic energy: PE<sub>top</sub> = KE<sub>bottom</sub>.</p>
+            <p><strong>Step 2 &mdash; Cancel the mass.</strong> mgh = &frac12;mv&sup2; &rarr; v&sup2; = 2gh. Mass cancels &mdash; the speed is the same for any mass.</p>
+            <p><strong>Step 3 &mdash; Substitute.</strong> v&sup2; = 2(9.8)(5.0) = 98, so v &asymp; <strong>9.9 m/s</strong>.</p>
+            <p><strong>Check.</strong> That is about 36 km/h &mdash; plausible for a 5 m drop.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- ---------- TOPIC 4 ---------- -->
+      <article class="card topic reveal" id="electricity">
+        <span class="tag">Topic 4</span>
+        <h2>Electricity &amp; Electrostatics</h2>
+        <p>
+          Electric charge is a property of matter. Charges at rest produce electric forces
+          (electrostatics); charges that move produce electric current.
+        </p>
+
+        <h3>Key ideas</h3>
+        <ul>
+          <li><strong>Like charges repel, opposite charges attract.</strong></li>
+          <li><strong>Coulomb&rsquo;s law</strong> gives the force between two point charges; it weakens with the square of the distance.</li>
+          <li><strong>Voltage</strong> is the energy per unit charge; <strong>current</strong> is the rate of charge flow; <strong>resistance</strong> opposes that flow.</li>
+          <li><strong>Series</strong> circuits share one path; <strong>parallel</strong> circuits offer several paths.</li>
+        </ul>
+
+        <h3>Key formulas</h3>
+        <div class="grid grid-3">
+          <div class="formula-card">
+            <h4>Ohm&rsquo;s law</h4>
+            <p class="formula">V <span class="op">=</span> IR</p>
+            <p class="formula-note">Use for any ohmic conductor at constant temperature.</p>
+          </div>
+          <div class="formula-card">
+            <h4>Electrical power</h4>
+            <p class="formula">P <span class="op">=</span> IV</p>
+            <p class="formula-note">Use to find energy per second in a component.</p>
+          </div>
+          <div class="formula-card">
+            <h4>Coulomb&rsquo;s law</h4>
+            <p class="formula">F <span class="op">=</span> k<span class="frac"><span class="num">q<sub>1</sub>q<sub>2</sub></span><span class="den">r&sup2;</span></span></p>
+            <p class="formula-note">Use for the force between two point charges.</p>
+          </div>
+          <div class="formula-card">
+            <h4>Electric field</h4>
+            <p class="formula">E <span class="op">=</span> <span class="frac"><span class="num">F</span><span class="den">q</span></span></p>
+            <p class="formula-note">Use for force per unit charge at a point.</p>
+          </div>
+        </div>
+
+        <h3>Worked example</h3>
+        <div class="acc">
+          <button class="acc-btn" type="button" aria-expanded="false" aria-controls="exEle">
+            A 12 V battery is connected to a 4.0 &Omega; resistor. Find the current and the power dissipated.
+            <span class="acc-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="acc-panel" id="exEle" hidden>
+            <p><strong>Step 1 &mdash; Find the current.</strong> I = V / R = 12 / 4.0 = <strong>3.0 A</strong>.</p>
+            <p><strong>Step 2 &mdash; Find the power.</strong> P = IV = (3.0)(12) = <strong>36 W</strong>.</p>
+            <p><strong>Check.</strong> Using P = I&sup2;R = (3.0)&sup2;(4.0) = 36 W. Both methods agree.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- ---------- TOPIC 5 ---------- -->
+      <article class="card topic reveal" id="waves">
+        <span class="tag">Topic 5</span>
+        <h2>Waves &amp; Sound</h2>
+        <p>
+          A wave transfers energy from one place to another without transferring matter. Sound,
+          light, and water ripples are all waves, described by the same handful of quantities.
+        </p>
+
+        <h3>Key ideas</h3>
+        <ul>
+          <li><strong>Amplitude</strong> is the maximum displacement from rest &mdash; it relates to loudness or brightness.</li>
+          <li><strong>Wavelength (&lambda;)</strong> is the distance between two matching points on a wave.</li>
+          <li><strong>Frequency (f)</strong> is the number of waves passing a point each second, in hertz.</li>
+          <li><strong>Period (T)</strong> is the time for one complete wave; T = 1/f.</li>
+        </ul>
+
+        <h3>Key formulas</h3>
+        <div class="grid grid-3">
+          <div class="formula-card">
+            <h4>Wave speed</h4>
+            <p class="formula">v <span class="op">=</span> f&lambda;</p>
+            <p class="formula-note">Use for any wave when frequency and wavelength are known.</p>
+          </div>
+          <div class="formula-card">
+            <h4>Period</h4>
+            <p class="formula">T <span class="op">=</span> <span class="frac"><span class="num">1</span><span class="den">f</span></span></p>
+            <p class="formula-note">Use to convert frequency into time per cycle.</p>
+          </div>
+          <div class="formula-card">
+            <h4>Snell&rsquo;s law</h4>
+            <p class="formula">n<sub>1</sub>sin&theta;<sub>1</sub> <span class="op">=</span> n<sub>2</sub>sin&theta;<sub>2</sub></p>
+            <p class="formula-note">Use when light bends between two materials.</p>
+          </div>
+        </div>
+
+        <h3>Worked example</h3>
+        <div class="acc">
+          <button class="acc-btn" type="button" aria-expanded="false" aria-controls="exWav">
+            A sound wave has a frequency of 440 Hz and a wavelength of 0.78 m. Find its speed and its period.
+            <span class="acc-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="acc-panel" id="exWav" hidden>
+            <p><strong>Step 1 &mdash; Find the speed.</strong> v = f&lambda; = (440)(0.78) &asymp; <strong>343 m/s</strong>.</p>
+            <p><strong>Step 2 &mdash; Find the period.</strong> T = 1/f = 1/440 &asymp; <strong>0.0023 s</strong> (2.3 ms).</p>
+            <p><strong>Check.</strong> 343 m/s is the accepted speed of sound in air at about 20 &deg;C &mdash; the numbers are consistent.</p>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+</div>
+
+<!-- ============================================================
+     PAGE: FORMULAS
+     ============================================================ -->
+<div class="page" id="page-formulas" hidden>
+
+  <section class="page-head">
+    <div class="wrap">
+      <p class="breadcrumb"><a href="#/home">Home</a> / Formulas &amp; Quick Reference</p>
+      <h1>Formulas &amp; Quick Reference</h1>
+      <p>Every equation here comes with a one-line note on <em>when</em> to use it. Search by name, symbol, or keyword, or filter by topic.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+
+      <div class="search-field">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/>
+        </svg>
+        <label class="sr-only" for="formulaSearch">Search formulas</label>
+        <input id="formulaSearch" type="search" placeholder="Search a formula, symbol, or keyword&hellip;" autocomplete="off" />
+      </div>
+
+      <div class="chips" role="group" aria-label="Filter formulas by topic">
+        <button class="chip" type="button" data-filter="all" aria-pressed="true">All</button>
+        <button class="chip" type="button" data-filter="mechanics" aria-pressed="false">Mechanics</button>
+        <button class="chip" type="button" data-filter="forces" aria-pressed="false">Forces</button>
+        <button class="chip" type="button" data-filter="energy" aria-pressed="false">Energy</button>
+        <button class="chip" type="button" data-filter="electricity" aria-pressed="false">Electricity</button>
+        <button class="chip" type="button" data-filter="waves" aria-pressed="false">Waves</button>
+      </div>
+
+      <div class="grid grid-3">
+
+        <div class="card formula-item" data-formula data-category="mechanics" data-keywords="average velocity displacement time speed">
+          <h3>Average velocity</h3>
+          <p class="formula">v&#772; <span class="op">=</span> <span class="frac"><span class="num">&Delta;d</span><span class="den">&Delta;t</span></span></p>
+          <p class="formula-vars">&Delta;d = displacement (m), &Delta;t = time interval (s)</p>
+          <p class="formula-note">Use for average motion over a time interval.</p>
+        </div>
+
+        <div class="card formula-item" data-formula data-category="mechanics" data-keywords="acceleration velocity change time">
+          <h3>Acceleration</h3>
+          <p class="formula">a <span class="op">=</span> <span class="frac"><span class="num">&Delta;v</span><span class="den">&Delta;t</span></span></p>
+          <p class="formula-vars">a in m/s&sup2;, &Delta;v = change in velocity</p>
+          <p class="formula-note">Use when velocity changes at a constant rate.</p>
+        </div>
+
+        <div class="card formula-item" data-formula data-category="mechanics" data-keywords="velocity kinematic equation time">
+          <h3>Velocity with acceleration</h3>
+          <p class="formula">v <span class="op">=</span> v<sub>0</sub> <span class="op">+</span> at</p>
+          <p class="formula-vars">v<sub>0</sub> = initial velocity, t = time</p>
+          <p class="formula-note">Use when initial velocity, acceleration, and time are known.</p>
+        </div>
+
+        <div class="card formula-item" data-formula data-category="mechanics" data-keywords="displacement kinematic equation distance">
+          <h3>Displacement</h3>
+          <p class="formula">d <span class="op">=</span> v<sub>0</sub>t <span class="op">+</span> &frac12;at&sup2;</p>
+          <p class="formula-vars">d = displacement (m)</p>
+          <p class="formula-note">Use when time is known but final velocity is not.</p>
+        </div>
+
+        <div class="card formula-item" data-formula data-category="mechanics" data-keywords="velocity displacement kinematic equation no time">
+          <h3>Velocity&ndash;displacement</h3>
+          <p class="formula">v&sup2; <span class="op">=</span> v<sub>0</sub>&sup2; <span class="op">+</span> 2ad</p>
+          <p class="formula-note">Use when time is unknown.</p>
+        </div>
+
+        <div class="card formula-item" data-formula data-category="forces" data-keywords="newton second law net force mass acceleration">
+          <h3>Newton&rsquo;s second law</h3>
+          <p class="formula">F<sub>net</sub> <span class="op">=</span> ma</p>
+          <p class="formula-vars">F in newtons (N), m in kg, a in m/s&sup2;</p>
+          <p class="formula-note">Use whenever a net force causes acceleration.</p>
+        </div>
+
+        <div class="card formula-item" data-formula data-category="forces" data-keywords="weight gravity mass">
+          <h3>Weight</h3>
+          <p class="formula">W <span class="op">=</span> mg</p>
+          <p class="formula-vars">g &asymp; 9.8 m/s&sup2; near Earth&rsquo;s surface</p>
+          <p class="formula-note">Use to convert mass into weight force.</p>
+        </div>
+
+        <div class="card formula-item" data-formula data-category="forces" data-keywords="friction normal force coefficient">
+          <h3>Friction</h3>
+          <p class="formula">f <span class="op">=</span> &mu;N</p>
+          <p class="formula-vars">&mu; = coefficient of friction (no unit)</p>
+          <p class="formula-note">Use for sliding contact between two surfaces.</p>
+        </div>
+
+        <div class="card formula-item" data-formula data-category="forces" data-keywords="momentum mass velocity collision">
+          <h3>Momentum</h3>
+          <p class="formula">p <span class="op">=</span> mv</p>
+          <p class="formula-vars">p in kg&middot;m/s</p>
+          <p class="formula-note">Use for collisions, explosions, and conservation problems.</p>
+        </div>
+
+        <div class="card formula-item" data-formula data-category="forces" data-keywords="impulse force time momentum">
+          <h3>Impulse</h3>
+          <p class="formula">F&Delta;t <span class="op">=</span> &Delta;p</p>
+          <p class="formula-note">Use when a force acts over a measured time interval.</p>
+        </div>
+
+        <div class="card formula-item" data-formula data-category="energy" data-keywords="work force distance angle joule">
+          <h3>Work</h3>
+          <p class="formula">W <span class="op">=</span> Fd cos&theta;</p>
+          <p class="formula-vars">&theta; = angle between force and displacement</p>
+          <p class="formula-note">Use when the force is not parallel to the motion.</p>
+        </div>
+
+        <div class="card formula-item" data-formula data-category="energy" data-keywords="kinetic energy motion speed">
+          <h3>Kinetic energy</h3>
+          <p class="formula">KE <span class="op">=</span> &frac12;mv&sup2;</p>
+          <p class="formula-vars">KE in joules (J)</p>
+          <p class="formula-note">Use for any object in motion.</p>
+        </div>
+
+        <div class="card formula-item" data-formula data-category="energy" data-keywords="potential energy height gravity">
+          <h3>Gravitational potential energy</h3>
+          <p class="formula">PE <span class="op">=</span> mgh</p>
+          <p class="formula-vars">h = height above reference level (m)</p>
+          <p class="formula-note">Use for objects raised above a reference point.</p>
+        </div>
+
+        <div class="card formula-item" data-formula data-category="energy" data-keywords="power work time watt">
+          <h3>Power</h3>
+          <p class="formula">P <span class="op">=</span> <span class="frac"><span class="num">W</span><span class="den">t</span></span></p>
+          <p class="formula-vars">P in watts (W) = joules per second</p>
+          <p class="formula-note">Use to compare how quickly work is done.</p>
+        </div>
+
+        <div class="card formula-item" data-formula data-category="electricity" data-keywords="ohm law voltage current resistance">
+          <h3>Ohm&rsquo;s law</h3>
+          <p class="formula">V <span class="op">=</span> IR</p>
+          <p class="formula-vars">V in volts (V), I in amperes (A), R in ohms (&Omega;)</p>
+          <p class="formula-note">Use for ohmic conductors at constant temperature.</p>
+        </div>
+
+        <div class="card formula-item" data-formula data-category="electricity" data-keywords="electrical power current voltage watt">
+          <h3>Electrical power</h3>
+          <p class="formula">P <span class="op">=</span> IV</p>
+          <p class="formula-note">Use to find the energy transferred per second.</p>
+        </div>
+
+        <div class="card formula-item" data-formula data-category="electricity" data-keywords="coulomb law charge force distance electrostatic">
+          <h3>Coulomb&rsquo;s law</h3>
+          <p class="formula">F <span class="op">=</span> k<span class="frac"><span class="num">q<sub>1</sub>q<sub>2</sub></span><span class="den">r&sup2;</span></span></p>
+          <p class="formula-vars">k &asymp; 9.0 &times; 10<sup>9</sup> N&middot;m&sup2;/C&sup2;</p>
+          <p class="formula-note">Use for the force between two point charges.</p>
+        </div>
+
+        <div class="card formula-item" data-formula data-category="electricity" data-keywords="electric field force charge">
+          <h3>Electric field strength</h3>
+          <p class="formula">E <span class="op">=</span> <span class="frac"><span class="num">F</span><span class="den">q</span></span></p>
+          <p class="formula-vars">E in newtons per coulomb (N/C)</p>
+          <p class="formula-note">Use for force per unit charge at a point.</p>
+        </div>
+
+        <div class="card formula-item" data-formula data-category="waves" data-keywords="wave speed frequency wavelength">
+          <h3>Wave speed</h3>
+          <p class="formula">v <span class="op">=</span> f&lambda;</p>
+          <p class="formula-vars">f in hertz (Hz), &lambda; in metres</p>
+          <p class="formula-note">Use for any wave, including sound and light.</p>
+        </div>
+
+        <div class="card formula-item" data-formula data-category="waves" data-keywords="period frequency time">
+          <h3>Period</h3>
+          <p class="formula">T <span class="op">=</span> <span class="frac"><span class="num">1</span><span class="den">f</span></span></p>
+          <p class="formula-vars">T in seconds (s)</p>
+          <p class="formula-note">Use to convert frequency into time per cycle.</p>
+        </div>
+
+        <div class="card formula-item" data-formula data-category="waves" data-keywords="snell law refraction angle refractive index">
+          <h3>Snell&rsquo;s law</h3>
+          <p class="formula">n<sub>1</sub>sin&theta;<sub>1</sub> <span class="op">=</span> n<sub>2</sub>sin&theta;<sub>2</sub></p>
+          <p class="formula-vars">n = refractive index, &theta; measured from the normal</p>
+          <p class="formula-note">Use when light bends as it crosses between materials.</p>
+        </div>
+
+      </div>
+
+      <p class="empty-state" id="formulaEmpty" hidden>No formulas match that search. Try a different keyword or press &ldquo;All&rdquo;.</p>
+
+      <div class="latex-lab reveal" style="margin-top:2.5rem;">
+        <label for="texInput">LaTeX preview lab &mdash; type an equation and see it typeset</label>
+        <textarea id="texInput" spellcheck="false">v = \frac{\Delta d}{\Delta t}</textarea>
+        <div class="tex-samples">
+          <button type="button" data-tex="F_{net} = ma">F = ma</button>
+          <button type="button" data-tex="v = f\lambda">v = f&lambda;</button>
+          <button type="button" data-tex="E_k = \tfrac{1}{2}mv^2">KE</button>
+          <button type="button" data-tex="F = k\frac{q_1 q_2}{r^2}">Coulomb</button>
+        </div>
+        <div class="latex-out" id="texOut" aria-live="polite"></div>
+        <p class="latex-hint">
+          This panel renders real LaTeX with MathJax. It needs an internet connection; the formula
+          cards above are plain HTML and work offline.
+        </p>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!-- ============================================================
+     PAGE: PRACTICE
+     ============================================================ -->
+<div class="page" id="page-practice" hidden>
+
+  <section class="page-head">
+    <div class="wrap">
+      <p class="breadcrumb"><a href="#/home">Home</a> / Practice &amp; Examples</p>
+      <h1>Practice &amp; Examples</h1>
+      <p>Try each problem on paper first. Then open the solution and compare your steps &mdash; not just your final answer.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Worked examples</h2>
+        <p>Three problems, each solved step by step with a check at the end.</p>
+      </div>
+
+      <div class="acc reveal">
+        <button class="acc-btn" type="button" aria-expanded="false" aria-controls="p1">
+          <span>1. A cyclist starts from rest and reaches 8.0 m/s in 4.0 s. What is the acceleration, and how far did they travel?</span>
+          <span class="acc-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="acc-panel" id="p1" hidden>
+          <p><strong>Given:</strong> v<sub>0</sub> = 0, v = 8.0 m/s, t = 4.0 s.</p>
+          <p><strong>Acceleration:</strong> a = &Delta;v / &Delta;t = (8.0 &minus; 0) / 4.0 = <strong>2.0 m/s&sup2;</strong>.</p>
+          <p><strong>Distance:</strong> d = v<sub>0</sub>t + &frac12;at&sup2; = 0 + &frac12;(2.0)(4.0)&sup2; = &frac12;(2.0)(16) = <strong>16 m</strong>.</p>
+          <p><strong>Check:</strong> average speed = (0 + 8.0)/2 = 4.0 m/s, and 4.0 &times; 4.0 = 16 m. Correct.</p>
+        </div>
+      </div>
+
+      <div class="acc reveal">
+        <button class="acc-btn" type="button" aria-expanded="false" aria-controls="p2">
+          <span>2. A 1500 kg car travelling at 20 m/s brakes to a stop in 50 m. What braking force acts on it?</span>
+          <span class="acc-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="acc-panel" id="p2" hidden>
+          <p><strong>Given:</strong> m = 1500 kg, v<sub>0</sub> = 20 m/s, v = 0, d = 50 m.</p>
+          <p><strong>Find acceleration first (time is unknown):</strong> v&sup2; = v<sub>0</sub>&sup2; + 2ad &rarr; 0 = 400 + 2a(50).</p>
+          <p>So 100a = &minus;400, giving a = <strong>&minus;4.0 m/s&sup2;</strong> (negative because it opposes motion).</p>
+          <p><strong>Force:</strong> F = ma = (1500)(&minus;4.0) = <strong>&minus;6000 N</strong>, i.e. 6000 N opposite to the direction of travel.</p>
+          <p><strong>Check:</strong> 6000 N is about 0.4 times the car&rsquo;s weight &mdash; a strong but realistic braking force.</p>
+        </div>
+      </div>
+
+      <div class="acc reveal">
+        <button class="acc-btn" type="button" aria-expanded="false" aria-controls="p3">
+          <span>3. Two resistors, 6.0 &Omega; and 3.0 &Omega;, are connected in parallel to a 12 V supply. Find the total current.</span>
+          <span class="acc-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="acc-panel" id="p3" hidden>
+          <p><strong>Step 1 &mdash; Find the equivalent resistance.</strong> For two resistors in parallel: 1/R = 1/6.0 + 1/3.0 = 0.1667 + 0.3333 = 0.5000.</p>
+          <p>So R = 1/0.5000 = <strong>2.0 &Omega;</strong>.</p>
+          <p><strong>Step 2 &mdash; Use Ohm&rsquo;s law.</strong> I = V / R = 12 / 2.0 = <strong>6.0 A</strong>.</p>
+          <p><strong>Check:</strong> branch currents are 12/6.0 = 2.0 A and 12/3.0 = 4.0 A, which add to 6.0 A. Correct &mdash; parallel branches share current.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Self-check quiz</h2>
+        <p>Pick an answer and get instant feedback. Your score is not stored anywhere.</p>
+      </div>
+
+      <div id="quizForm" class="reveal"></div>
+
+      <div class="btn-row">
+        <button class="btn btn-ghost" type="button" id="quizReset">Reset quiz</button>
+        <a class="btn btn-primary" href="#/formulas">Review the formulas</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============================================================
+     PAGE: RESOURCES
+     ============================================================ -->
+<div class="page" id="page-resources" hidden>
+
+  <section class="page-head">
+    <div class="wrap">
+      <p class="breadcrumb"><a href="#/home">Home</a> / Learning Resources</p>
+      <h1>Learning Resources</h1>
+      <p>Trusted places to go when you want a second explanation, a simulation, or a video walkthrough.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="grid grid-2">
+
+        <div class="card reveal">
+          <span class="tag">Simulations</span>
+          <h2>PhET Interactive Simulations</h2>
+          <p>
+            Free, browser-based physics simulations from the University of Colorado Boulder. Excellent
+            for seeing forces, circuits, waves, and energy behave in real time.
+          </p>
+          <p><a href="https://phet.colorado.edu/en/simulations/filter?subjects=physics" target="_blank" rel="noopener">phet.colorado.edu &rarr;</a></p>
+        </div>
+
+        <div class="card reveal">
+          <span class="tag">Reading</span>
+          <h2>The Physics Classroom</h2>
+          <p>
+            Plain-language tutorials, diagrams, and practice questions organised by topic &mdash;
+            very close in style to what Studi-Phy is trying to do.
+          </p>
+          <p><a href="https://www.physicsclassroom.com/" target="_blank" rel="noopener">physicsclassroom.com &rarr;</a></p>
+        </div>
+
+        <div class="card reveal">
+          <span class="tag">Video</span>
+          <h2>Khan Academy Physics</h2>
+          <p>
+            Short video lessons with built-in practice, covering mechanics through electricity and
+            waves. Free with an account.
+          </p>
+          <p><a href="https://www.khanacademy.org/science/physics" target="_blank" rel="noopener">khanacademy.org &rarr;</a></p>
+        </div>
+
+        <div class="card reveal">
+          <span class="tag">Video</span>
+          <h2>Crash Course Physics</h2>
+          <p>
+            Fast-paced, well-illustrated video series on YouTube &mdash; useful for a big-picture
+            overview before or after studying a topic in detail.
+          </p>
+          <p><a href="https://www.youtube.com/playlist?list=PL8dPuuaLjXtN0ge7yDk_UA0ldZJdhwkoV" target="_blank" rel="noopener">YouTube playlist &rarr;</a></p>
+        </div>
+
+        <div class="card reveal">
+          <span class="tag">Reference</span>
+          <h2>HyperPhysics</h2>
+          <p>
+            A concept-map reference from Georgia State University. Handy for quickly checking a
+            definition or a relationship between quantities.
+          </p>
+          <p><a href="http://hyperphysics.phy-astr.gsu.edu/hbase/hframe.html" target="_blank" rel="noopener">hyperphysics.phy-astr.gsu.edu &rarr;</a></p>
+        </div>
+
+        <div class="card reveal">
+          <span class="tag">Practice</span>
+          <h2>OpenStax College Physics</h2>
+          <p>
+            A free, openly licensed physics textbook with end-of-chapter problems and worked
+            solutions. Good for extended practice.
+          </p>
+          <p><a href="https://openstax.org/details/books/college-physics-2e" target="_blank" rel="noopener">openstax.org &rarr;</a></p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Credits &amp; references</h2>
+        <p>Borrowed material is listed here. Add a row for every external image or source you use before publishing.</p>
+      </div>
+
+      <div class="table-wrap reveal">
+        <table>
+          <thead>
+            <tr><th scope="col">Item</th><th scope="col">Type</th><th scope="col">Source / credit</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>All explanatory text</td>
+              <td>Original writing</td>
+              <td>Written for the Studi-Phy project by Group 9, Grade 12 STEM &ndash; Avery.</td>
+            </tr>
+            <tr>
+              <td>Projectile and free-body diagrams</td>
+              <td>SVG graphics</td>
+              <td>Drawn as inline SVG specifically for this site &mdash; no external licence required.</td>
+            </tr>
+            <tr>
+              <td>Icons and logo mark</td>
+              <td>SVG graphics</td>
+              <td>Drawn for the project.</td>
+            </tr>
+            <tr>
+              <td>Member photos</td>
+              <td>Photographs</td>
+              <td>Provided by each member for this project. Used with permission.</td>
+            </tr>
+            <tr>
+              <td>Poppins &amp; Inter typefaces</td>
+              <td>Fonts</td>
+              <td>Google Fonts, used under the SIL Open Font License.</td>
+            </tr>
+            <tr>
+              <td>MathJax</td>
+              <td>Library</td>
+              <td>MathJax v3, Apache License 2.0, loaded from a public CDN.</td>
+            </tr>
+            <tr>
+              <td><em>Add your own image here</em></td>
+              <td>Image</td>
+              <td><em>Creator name, title, source URL, licence.</em></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout reveal">
+        <span class="callout-title">Responsible use of digital content</span>
+        <p>
+          Every borrowed image, diagram, or quotation must be credited with its creator, source, and
+          licence. Where a licence does not permit reuse, the material is replaced with original work
+          or a link to the source instead of a copy.
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============================================================
+     PAGE: STUDY TIPS
+     ============================================================ -->
+<div class="page" id="page-tips" hidden>
+
+  <section class="page-head">
+    <div class="wrap">
+      <p class="breadcrumb"><a href="#/home">Home</a> / Study Tips</p>
+      <h1>Study Tips</h1>
+      <p>Short, practical advice on how to study physics effectively &mdash; most of it is about habits, not talent.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="grid grid-2">
+
+        <div class="card reveal">
+          <span class="tag">Tip 1</span>
+          <h3>Draw the situation before touching a formula</h3>
+          <p>
+            Sketch the object, the surfaces, and every force or velocity as an arrow. Most wrong
+            answers in physics come from a wrong picture, not wrong algebra.
+          </p>
+        </div>
+
+        <div class="card reveal">
+          <span class="tag">Tip 2</span>
+          <h3>Write down what is given and what is asked</h3>
+          <p>
+            Two short lists: &ldquo;known&rdquo; and &ldquo;find&rdquo;. Then look for the one
+            equation that connects them. This turns a word problem into a matching exercise.
+          </p>
+        </div>
+
+        <div class="card reveal">
+          <span class="tag">Tip 3</span>
+          <h3>Track your units the whole way</h3>
+          <p>
+            If the units do not come out to m/s&sup2;, you probably divided when you should have
+            multiplied. Units are a free error check on every problem.
+          </p>
+        </div>
+
+        <div class="card reveal">
+          <span class="tag">Tip 4</span>
+          <h3>Ask whether the answer is reasonable</h3>
+          <p>
+            A bicycle does not travel at 300 m/s. A 2 kg box does not weigh 2 N. A quick sanity
+            check catches many mistakes before your teacher does.
+          </p>
+        </div>
+
+        <div class="card reveal">
+          <span class="tag">Tip 5</span>
+          <h3>Practise solving, not rereading</h3>
+          <p>
+            Reading notes feels productive but tests recognition, not recall. Close the page and try
+            to redo a worked example from memory &mdash; that is where learning happens.
+          </p>
+        </div>
+
+        <div class="card reveal">
+          <span class="tag">Tip 6</span>
+          <h3>Study in short, spaced sessions</h3>
+          <p>
+            Twenty-five focused minutes a day beats a four-hour cram. Returning to a topic after a
+            day is what moves it into long-term memory.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="card reveal" style="margin-top:1.6rem;">
+        <h2>Problem-solving checklist</h2>
+        <p>Run through this every time you solve a physics problem.</p>
+        <ol class="steps">
+          <li><strong>Picture it.</strong> Sketch the situation and label everything you know.</li>
+          <li><strong>List knowns and unknowns</strong> with their units.</li>
+          <li><strong>Choose the equation</strong> that links them &mdash; and say why it applies.</li>
+          <li><strong>Rearrange before substituting</strong> so the algebra stays clean.</li>
+          <li><strong>Calculate</strong>, keeping units in every line.</li>
+          <li><strong>Check</strong> the size, sign, and units of your answer.</li>
+        </ol>
+      </div>
+
+      <div class="callout warn reveal">
+        <span class="callout-title">A reminder about honesty</span>
+        <p>
+          These notes are study aids, not shortcuts. Use them to understand a method, then close the
+          page and do the problem yourself &mdash; otherwise the understanding will not stick when
+          it counts.
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
+
+</main>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-brand">Studi<span>-Phy</span></p>
+      <p class="footer-tag">Physics Made Clear, One Concept at a Time.</p>
+    </div>
+    <nav aria-label="Footer">
+      <h3>Explore</h3>
+      <ul>
+        <li><a href="#/about">About the Project</a></li>
+        <li><a href="#/team">The Team</a></li>
+        <li><a href="#/topics">Physics Topics</a></li>
+        <li><a href="#/formulas">Formulas</a></li>
+        <li><a href="#/practice">Practice</a></li>
+        <li><a href="#/resources">Resources</a></li>
+        <li><a href="#/tips">Study Tips</a></li>
+      </ul>
+    </nav>
+    <div>
+      <h3>Prepared by</h3>
+      <p><a href="#/team">Group 9 &middot; Grade 12 STEM - Avery &middot; November 26, 2026</a></p>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <p>&copy; <span id="year">2026</span> Studi-Phy &middot; An Empowerment Technologies project for Grade 12 STEM - Avery. All borrowed images and references are credited on the <a href="#/resources">Resources</a> page.</p>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" type="button" aria-label="Back to top">&uarr;</button>
+
+<script>
+/* =========================================================
+   Studi-Phy — single-file behaviour
+   ========================================================= */
+(function () {
+  'use strict';
+
+  document.documentElement.classList.add('js');
+
+  /* ---------- 1. Routing (hash based, simulates pages) ---------- */
+  var ROUTES = ['home', 'about', 'team', 'topics', 'formulas', 'practice', 'resources', 'tips'];
+  var TITLES = {
+    home: 'Studi-Phy — Physics Made Clear, One Concept at a Time',
+    about: 'About the Project — Studi-Phy',
+    team: 'The Team — Studi-Phy',
+    topics: 'Physics Topics — Studi-Phy',
+    formulas: 'Formulas & Quick Reference — Studi-Phy',
+    practice: 'Practice & Examples — Studi-Phy',
+    resources: 'Learning Resources — Studi-Phy',
+    tips: 'Study Tips — Studi-Phy'
+  };
+
+  var pages = Array.prototype.slice.call(document.querySelectorAll('.page'));
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('[data-nav]'));
+  var revealObserver = null;
+
+  function parseRoute() {
+    var h = window.location.hash;
+    if (h.indexOf('#/') !== 0) return null;
+    var r = h.slice(2).split('?')[0];
+    return ROUTES.indexOf(r) !== -1 ? r : null;
+  }
+
+  function observeReveals(scope) {
+    var els = Array.prototype.slice.call(scope.querySelectorAll('.reveal:not(.is-visible)'));
+    if (!els.length) return;
+
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(function (el) { el.classList.add('is-visible'); });
+      return;
+    }
+    if (!revealObserver) {
+      revealObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    }
+    els.forEach(function (el) { revealObserver.observe(el); });
+  }
+
+  function showPage(route) {
+    pages.forEach(function (page) {
+      page.hidden = page.id !== 'page-' + route;
+    });
+
+    navLinks.forEach(function (link) {
+      if (link.getAttribute('data-nav') === route) {
+        link.setAttribute('aria-current', 'page');
+      } else {
+        link.removeAttribute('aria-current');
+      }
+    });
+
+    document.title = TITLES[route] || TITLES.home;
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+
+    var current = document.getElementById('page-' + route);
+    if (current) observeReveals(current);
+
+    if (route === 'formulas') renderLatex();
+
+    if (window.MathJax && typeof window.MathJax.typesetPromise === 'function' && current) {
+      window.MathJax.typesetPromise([current]).catch(function () {});
+    }
+  }
+
+  window.addEventListener('hashchange', function () {
+    var route = parseRoute();
+    if (route) showPage(route);
+  });
+
+  showPage(parseRoute() || 'home');
+
+  /* ---------- 2. Mobile navigation ---------- */
+  var navToggle = document.getElementById('navToggle');
+  var primaryNav = document.getElementById('primaryNav');
+
+  if (navToggle && primaryNav) {
+    navToggle.addEventListener('click', function () {
+      var open = primaryNav.classList.toggle('is-open');
+      navToggle.setAttribute('aria-expanded', String(open));
+    });
+
+    primaryNav.addEventListener('click', function (e) {
+      if (e.target.closest('a') && window.matchMedia('(max-width: 900px)').matches) {
+        primaryNav.classList.remove('is-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && primaryNav.classList.contains('is-open')) {
+        primaryNav.classList.remove('is-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        navToggle.focus();
+      }
+    });
+  }
+
+  /* ---------- 3. Accordions ---------- */
+  document.querySelectorAll('.acc-btn').forEach(function (btn) {
+    var panel = document.getElementById(btn.getAttribute('aria-controls'));
+    if (!panel) return;
+    btn.addEventListener('click', function () {
+      var isOpen = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!isOpen));
+      panel.hidden = isOpen;
+    });
+  });
+
+  /* ---------- 4. Topic jump chips ---------- */
+  document.querySelectorAll('[data-scroll]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var target = document.getElementById(btn.getAttribute('data-scroll'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  /* ---------- 5. Formula search + filter ---------- */
+  var searchInput = document.getElementById('formulaSearch');
+  var filterChips = Array.prototype.slice.call(document.querySelectorAll('.chip[data-filter]'));
+  var formulaItems = Array.prototype.slice.call(document.querySelectorAll('[data-formula]'));
+  var emptyState = document.getElementById('formulaEmpty');
+  var activeCategory = 'all';
+
+  function applyFormulaFilter() {
+    var query = (searchInput && searchInput.value ? searchInput.value : '').trim().toLowerCase();
+
+    formulaItems.forEach(function (item) {
+      var category = item.getAttribute('data-category') || '';
+      var haystack = (item.textContent + ' ' + (item.getAttribute('data-keywords') || '')).toLowerCase();
+      var matchCategory = activeCategory === 'all' || category === activeCategory;
+      var matchQuery = !query || haystack.indexOf(query) !== -1;
+      item.hidden = !(matchCategory && matchQuery);
+    });
+
+    if (emptyState) {
+      emptyState.hidden = formulaItems.some(function (item) { return !item.hidden; });
+    }
+  }
+
+  if (formulaItems.length) {
+    if (searchInput) searchInput.addEventListener('input', applyFormulaFilter);
+
+    filterChips.forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        activeCategory = chip.getAttribute('data-filter');
+        filterChips.forEach(function (c) {
+          c.setAttribute('aria-pressed', String(c === chip));
+        });
+        applyFormulaFilter();
+      });
+    });
+
+    applyFormulaFilter();
+  }
+
+  /* ---------- 6. Quiz ---------- */
+  var QUIZ = [
+    {
+      q: 'What is the SI unit of acceleration?',
+      options: ['m/s', 'm/s²', 'N', 'kg·m/s'],
+      answer: 1,
+      why: 'Acceleration is the rate of change of velocity, so its unit is metres per second per second (m/s²).'
+    },
+    {
+      q: 'A car travels at a constant velocity of 20 m/s. What is the net force on it?',
+      options: ['20 N forward', 'Equal to its weight', 'Zero', 'It cannot be determined'],
+      answer: 2,
+      why: 'Constant velocity means zero acceleration, and by Newton’s second law F_net = ma = 0.'
+    },
+    {
+      q: 'If the speed of an object doubles, its kinetic energy…',
+      options: ['stays the same', 'doubles', 'triples', 'quadruples'],
+      answer: 3,
+      why: 'KE = ½mv². Kinetic energy scales with the square of speed, so doubling the speed gives 2² = 4 times the energy.'
+    },
+    {
+      q: 'Which equation correctly states Ohm’s law?',
+      options: ['I = V/R', 'I = R/V', 'V = I/R', 'R = I·V'],
+      answer: 0,
+      why: 'Ohm’s law is V = IR. Dividing both sides by R gives I = V/R.'
+    },
+    {
+      q: 'The speed of a wave equals…',
+      options: ['frequency ÷ wavelength', 'wavelength ÷ frequency', 'frequency × wavelength', 'amplitude × frequency'],
+      answer: 2,
+      why: 'v = fλ. One wavelength passes a point every period, so speed = frequency × wavelength.'
+    }
+  ];
+
+  var quizHost = document.getElementById('quizForm');
+
+  if (quizHost) {
+    QUIZ.forEach(function (item, index) {
+      var fieldset = document.createElement('fieldset');
+      fieldset.className = 'quiz-q';
+
+      var legend = document.createElement('legend');
+      legend.textContent = 'Q' + (index + 1) + '. ' + item.q;
+      fieldset.appendChild(legend);
+
+      item.options.forEach(function (option, optionIndex) {
+        var label = document.createElement('label');
+        label.className = 'quiz-opt';
+
+        var input = document.createElement('input');
+        input.type = 'radio';
+        input.name = 'q' + index;
+        input.value = String(optionIndex);
+
+        var text = document.createElement('span');
+        text.textContent = option;
+
+        label.appendChild(input);
+        label.appendChild(text);
+        fieldset.appendChild(label);
+      });
+
+      var feedback = document.createElement('p');
+      feedback.className = 'quiz-fb';
+      feedback.id = 'fb' + index;
+      feedback.setAttribute('role', 'status');
+      fieldset.appendChild(feedback);
+
+      quizHost.appendChild(fieldset);
+    });
+
+    quizHost.addEventListener('change', function (e) {
+      var input = e.target.closest('input[type="radio"]');
+      if (!input) return;
+
+      var index = Number(input.name.slice(1));
+      var feedback = document.getElementById('fb' + index);
+      if (!feedback) return;
+
+      var isCorrect = Number(input.value) === QUIZ[index].answer;
+      feedback.className = 'quiz-fb show ' + (isCorrect ? 'ok' : 'bad');
+      feedback.textContent = (isCorrect ? '✓ Correct. ' : '✗ Not quite. ') + QUIZ[index].why;
+    });
+
+    var resetBtn = document.getElementById('quizReset');
+    if (resetBtn) {
+      resetBtn.addEventListener('click', function () {
+        quizHost.querySelectorAll('input[type="radio"]').forEach(function (input) {
+          input.checked = false;
+        });
+        quizHost.querySelectorAll('.quiz-fb').forEach(function (feedback) {
+          feedback.className = 'quiz-fb';
+          feedback.textContent = '';
+        });
+        quizHost.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+  }
+
+  /* ---------- 7. LaTeX preview (MathJax, progressive) ---------- */
+  var texInput = document.getElementById('texInput');
+  var texOutput = document.getElementById('texOut');
+
+  function renderLatex() {
+    if (!texOutput) return;
+    var source = (texInput && texInput.value.trim()) || 'E = mc^2';
+
+    if (window.MathJax && typeof window.MathJax.typesetPromise === 'function') {
+      texOutput.innerHTML = '\\[' + source + '\\]';
+      window.MathJax.typesetPromise([texOutput]).catch(function () {
+        texOutput.textContent = source;
+      });
+    } else {
+      texOutput.textContent =
+        'LaTeX preview needs an internet connection. Your input: ' + source;
+    }
+  }
+
+  if (texOutput) {
+    var attempts = 0;
+    var poll = setInterval(function () {
+      attempts += 1;
+      if (window.MathJax && typeof window.MathJax.typesetPromise === 'function') {
+        clearInterval(poll);
+        renderLatex();
+      } else if (attempts > 40) {
+        clearInterval(poll);
+        renderLatex();
+      }
+    }, 250);
+
+    if (texInput) {
+      var texTimer;
+      texInput.addEventListener('input', function () {
+        clearTimeout(texTimer);
+        texTimer = setTimeout(renderLatex, 350);
+      });
+    }
+
+    document.querySelectorAll('[data-tex]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        if (!texInput) return;
+        texInput.value = btn.getAttribute('data-tex');
+        renderLatex();
+      });
+    });
+  }
+
+  /* ---------- 8. Back to top + footer year ---------- */
+  var toTop = document.getElementById('toTop');
+  if (toTop) {
+    window.addEventListener('scroll', function () {
+      toTop.classList.toggle('show', window.scrollY > 420);
+    }, { passive: true });
+
+    toTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  var yearSpan = document.getElementById('year');
+  if (yearSpan) yearSpan.textContent = String(new Date().getFullYear());
+
+})();
+</script>
+</body>
+</html>
